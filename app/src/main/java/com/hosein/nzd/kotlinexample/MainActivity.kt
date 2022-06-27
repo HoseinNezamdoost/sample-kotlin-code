@@ -6,14 +6,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.hosein.nzd.nikestore.HttpClient
+import com.hosein.nzd.nikestore.MainViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
+
+    private val httpClient: HttpClient by inject()
+    private val mainViewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        httpClient.requestService()
+        mainViewModel.addToValue()
 
         /*val apiService : ApiService by lazy {
             val retrofit = Retrofit.Builder()
